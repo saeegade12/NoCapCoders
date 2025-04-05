@@ -1,4 +1,7 @@
-Hogwarts Study Tracker - README
+Study Tracker 
+
+
+
 🏰 Overview
 The Hogwarts Study Tracker is a magical productivity dashboard designed to help students organize their study sessions with a Harry Potter-inspired interface. This web application combines task management with Hogwarts house theming to make studying more engaging.
 
