@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time-Turner Planner</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            background: url('../dining-room-5114247_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Cinzel', serif;
+            color: #f5e8c0;
+        }
+        
+        .container {
+            background-color: rgba(10, 10, 10, 0.85);
+            min-height: 100vh;
+            width: 100%;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .planner-container {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #f5e8c0;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #d3a625;
+            border-radius: 5px;
+            font-family: 'Cinzel', serif;
+            background-color: rgba(20, 20, 20, 0.8);
+            color: #f5e8c0;
+        }
+        
+        .playlist-preview {
+            background-color: rgba(20, 20, 20, 0.8);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            border: 1px solid #d3a625;
+        }
+        
+        .playlist-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-bottom: 1px solid #d3a625;
+            color: #f5e8c0;
+        }
+        
+        .banner {
+            background: linear-gradient(135deg, rgba(116, 0, 1, 0.7), rgba(14, 26, 64, 0.7));
+            border-bottom: 3px solid #d3a625;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="banner">
+            <h1>Time-Turner Planner</h1>
+            <div class="house-badge" id="user-house">
+                <span>Ravenclaw</span>
+            </div>
+        </header>
+
+        <main class="planner-container">
+            <h2>Plan Your Study Sessions</h2>
+            <p>Like Hermione with her Time-Turner, plan your study schedule wisely</p>
+            
+            <form id="study-plan-form">
+                <div class="form-group">
+                    <label for="subject">Choose Your Subject:</label>
+                    <select id="subject" required>
+                        <option value="">-- Select a subject --</option>
+                        <option value="dada">Defense Against the Dark Arts</option>
+                        <option value="potions">Potions</option>
+                        <option value="charms">Charms</option>
+                        <option value="transfiguration">Transfiguration</option>
+                        <option value="herbology">Herbology</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="topic">Specific Topic:</label>
+                    <input type="text" id="topic" placeholder="e.g., Patronus Charm, Polyjuice Potion">
+                </div>
+                
+                <div class="form-group">
+                    <label for="duration">Study Duration (minutes):</label>
+                    <input type="number" id="duration" min="15" max="240" value="45">
+                </div>
+                
+                <div class="form-group">
+                    <label for="date">Scheduled Date:</label>
+                    <input type="date" id="date">
+                </div>
+                
+                <div class="form-group">
+                    <label>Recommended Study Playlist:</label>
+                    <div class="playlist-preview">
+                        <h3>Ravenclaw Focus Mix</h3>
+                        <div class="playlist-item">
+                            <span>1. Hedwig's Theme (Study Version)</span>
+                        </div>
+                        <div class="playlist-item">
+                            <span>2. Ravenclaw Common Room Ambience</span>
+                        </div>
+                        <div class="playlist-item">
+                            <span>3. Lumos - Study Concentration</span>
+                        </div>
+                        <div class="playlist-item">
+                            <span>4. Celestina Warbeck Instrumental</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="hogwarts-button">Save Study Plan</button>
+            </form>
+            
+            <button class="hogwarts-button" onclick="window.location.href='../index.html'" style="margin-top: 1rem;">Return to Dashboard</button>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('subject').addEventListener('change', function() {
+            const playlistPreview = document.querySelector('.playlist-preview');
+            if (this.value === 'dada') {
+                playlistPreview.innerHTML = `
+                    <h3>Defense Against Distractions Mix</h3>
+                    <div class="playlist-item">
+                        <span>1. Battle of Hogwarts Ambience</span>
+                    </div>
+                    <div class="playlist-item">
+                        <span>2. Expecto Patronum - Focus Beats</span>
+                    </div>
+                    <div class="playlist-item">
+                        <span>3. Dumbledore's Army Study Session</span>
+                    </div>
+                `;
+            } else if (this.value === 'potions') {
+                playlistPreview.innerHTML = `
+                    <h3>Potions Master Concentration</h3>
+                    <div class="playlist-item">
+                        <span>1. Snape's Laboratory Sounds</span>
+                    </div>
+                    <div class="playlist-item">
+                        <span>2. Liquid Luck Lofi</span>
+                    </div>
+                    <div class="playlist-item">
+                        <span>3. Felix Felicis Focus</span>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

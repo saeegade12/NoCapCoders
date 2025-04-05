@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hogwarts Study Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=MedievalSharp&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background: url('dining-room-5114247_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Cinzel', serif;
+            color: #f5e8c0;
+        }
+        
+        .container {
+            background-color: rgba(10, 10, 10, 0.85);
+            min-height: 100vh;
+            width: 100%;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .card {
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 1px solid #d3a625;
+            color: #f5e8c0;
+        }
+        
+        .banner {
+            background: linear-gradient(135deg, rgba(116, 0, 1, 0.7), rgba(14, 26, 64, 0.7));
+            border-bottom: 3px solid #d3a625;
+        }
+        
+        /* New Pie Chart Container */
+        .pie-chart-container {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        
+        /* Game Card Styles */
+        .game-card {
+            background: linear-gradient(135deg, rgba(30, 215, 96, 0.1), rgba(29, 185, 84, 0.2));
+            border: 2px solid #1db954;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="banner">
+            <img src="assets/hogwarts-crest.png" alt="Hogwarts Crest" class="crest">
+            <h1>Hogwarts Study Scrolls</h1>
+            <div class="house-badge" id="user-house">
+                <span>Ravenclaw</span>
+            </div>
+        </header>
+
+        <main class="dashboard-grid">
+            <!-- Feature 1: Wrapped (Spotify style) -->
+            <section class="card wrapped-card" onclick="window.location.href='wrapped.html'">
+                <div class="card-header">
+                    <h2>Marauder's Map of Your Progress</h2>
+                    <div class="hogwarts-express">🚂</div>
+                </div>
+                <p>Reveal your year in study - just like the Marauder's Map reveals secrets!</p>
+                <button class="hogwarts-button">View Your Magical Wrapped</button>
+            </section>
+            
+            <!-- Feature 2: Streaks -->
+            <section class="card streak-card">
+                <div class="card-header">
+                    <h2>Daily Prophet Streaks</h2>
+                    <div class="streak-count">🔥 7</div>
+                </div>
+                <div class="streak-visual">
+                    <div class="day" data-completed="true">M</div>
+                    <div class="day" data-completed="true">T</div>
+                    <div class="day" data-completed="true">W</div>
+                    <div class="day" data-completed="true">T</div>
+                    <div class="day" data-completed="true">F</div>
+                    <div class="day" data-completed="false">S</div>
+                    <div class="day" data-completed="false">S</div>
+                </div>
+                <p>Current streak: 5 days - Keep it up to earn House Points!</p>
+            </section>
+
+            <!-- Feature 3: Pie Chart for Syllabus Completion -->
+            <section class="card progress-card">
+                <div class="card-header">
+                    <h2>O.W.L. Syllabus Completion</h2>
+                    <div class="owl-icon">🦉</div>
+                </div>
+                <div class="pie-chart-container">
+                    <canvas id="syllabusChart"></canvas>
+                </div>
+                <div class="subject-progress">
+                    <h3>Defense Against the Dark Arts: 75%</h3>
+                    <h3>Potions: 40%</h3>
+                    <h3>Charms: 90%</h3>
+                </div>
+            </section>
+
+            <!-- Feature 4: Goal Setting -->
+            <section class="card goal-card" onclick="window.location.href='goal-setting.html'">
+                <div class="card-header">
+                    <h2>Time-Turner Planner</h2>
+                    <div class="time-turner">⏳</div>
+                </div>
+                <p>Plan your study sessions like Hermione with her Time-Turner</p>
+                <button class="hogwarts-button">Set New Study Goals</button>
+            </section>
+
+            <!-- New Feature 5: Aptitude and Logical Reasoning Games -->
+            <section class="card game-card" onclick="window.location.href='house-games.html'">
+                <div class="card-header">
+                    <h2>House Cup Challenges</h2>
+                    <div class="house-cup-icon">🏆</div>
+                </div>
+                <p>Test your wits in magical aptitude challenges to earn house points!</p>
+                <div class="game-types">
+                    <span class="game-badge gryffindor">Dueling Puzzles</span>
+                    <span class="game-badge ravenclaw">Riddle Me This</span>
+                    <span class="game-badge hufflepuff">Pattern Potions</span>
+                    <span class="game-badge slytherin">Logic Labyrinth</span>
+                </div>
+                <button class="hogwarts-button">Enter the Tournament</button>
+            </section>
+        </main>
+
+        <footer class="hogwarts-footer">
+            <p>"It does not do to dwell on dreams and forget to live." - Albus Dumbledore</p>
+        </footer>
+    </div>
+
+    <script>
+        // Pie Chart for Syllabus Completion
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('syllabusChart').getContext('2d');
+            const syllabusChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Completed', 'Remaining'],
+                    datasets: [{
+                        data: [65, 35],
+                        backgroundColor: [
+                            'rgba(29, 185, 84, 0.7)',
+                            'rgba(116, 0, 1, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 255, 255, 1)',
+                            'rgba(255, 255, 255, 1)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#f5e8c0',
+                                font: {
+                                    family: 'Cinzel',
+                                    size: 14
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Randomly assign a house (for demo purposes)
+            const houses = [
+                { name: "Gryffindor", color: "var(--gryffindor-red)", text: "white" },
+                { name: "Slytherin", color: "var(--slytherin-green)", text: "white" },
+                { name: "Ravenclaw", color: "var(--ravenclaw-blue)", text: "white" },
+                { name: "Hufflepuff", color: "var(--hufflepuff-yellow)", text: "var(--ink)" }
+            ];
+            
+            const randomHouse = houses[Math.floor(Math.random() * houses.length)];
+            const houseBadges = document.querySelectorAll('#user-house');
+            
+            houseBadges.forEach(badge => {
+                badge.textContent = randomHouse.name;
+                badge.style.backgroundColor = randomHouse.color;
+                badge.style.color = randomHouse.text;
+            });
+        });
+    </script>
+</body>
+</html>

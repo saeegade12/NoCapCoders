@@ -1,0 +1,221 @@
+/* Base Styles */
+:root {
+    --gryffindor-red: #740001;
+    --gryffindor-gold: #d3a625;
+    --slytherin-green: #1a472a;
+    --slytherin-silver: #aaaaaa;
+    --ravenclaw-blue: #0e1a40;
+    --ravenclaw-bronze: #946b2d;
+    --hufflepuff-yellow: #ecb939;
+    --hufflepuff-black: #372e29;
+    --parchment: #f5e8c0;
+    --ink: #3a352a;
+}
+
+body {
+    background: url('assets/got-hp-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--ink);
+    font-family: 'Cinzel', serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: rgba(10, 10, 10, 0.85);
+    min-height: 100vh;
+    width: 80%; /* Adjust width as needed */
+    margin: 0 auto; /* Centers the container horizontally */
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers child elements */
+    justify-content: center; /* Centers content vertically */
+}
+
+/* Header */
+.banner {
+    width: 100%;
+    background: linear-gradient(135deg, var(--ravenclaw-blue), var(--gryffindor-red));
+    color: var(--parchment);
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    border-bottom: 5px solid var(--gryffindor-gold);
+    box-sizing: border-box; /* makes padding not overflow width */
+}
+
+.crest {
+    width: 80px;
+    position: absolute;
+    left: 20px;
+    top: 10px;
+}
+
+.house-badge {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    background-color: var(--ravenclaw-bronze);
+    color: white;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.card {
+    background-color: var(--parchment);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 0.5rem;
+}
+
+/* Wrapped Card */
+.wrapped-card {
+    background: linear-gradient(rgba(116, 0, 1, 0.1), rgba(116, 0, 1, 0.1)), url('assets/marauders-map-texture.jpg');
+    background-size: cover;
+    color: var(--ink);
+    grid-column: span 2;
+}
+
+.hogwarts-express {
+    font-size: 2rem;
+}
+
+/* Streak Card */
+.streak-card {
+    background-color: rgba(29, 71, 42, 0.1);
+}
+
+.streak-visual {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.day {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--hufflepuff-yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid var(--ink);
+}
+
+.day[data-completed="true"] {
+    background-color: var(--gryffindor-red);
+    color: white;
+}
+
+.streak-count {
+    font-size: 1.5rem;
+    color: var(--gryffindor-red);
+}
+
+/* Progress Card */
+.progress-card {
+    background-color: rgba(14, 26, 64, 0.1);
+}
+
+.progress-bar {
+    height: 25px;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--ink);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--ravenclaw-blue), var(--slytherin-green));
+    border-radius: 5px;
+}
+
+.progress-text {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px black;
+}
+
+/* Goal Card */
+.goal-card {
+    background: linear-gradient(rgba(211, 166, 37, 0.2), rgba(211, 166, 37, 0.2)), url('assets/time-turner-texture.jpg');
+    background-size: cover;
+}
+
+.time-turner {
+    font-size: 2rem;
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Buttons */
+.hogwarts-button {
+    background-color: var(--gryffindor-red);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hogwarts-button:hover {
+    background-color: var(--ravenclaw-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer */
+.hogwarts-footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: var(--ink);
+    color: var(--parchment);
+    font-style: italic;
+    border-top: 3px solid var(--gryffindor-gold);
+}

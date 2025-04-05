@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marauder's Map of Your Progress</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            background: url('../dining-room-5114247_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Cinzel', serif;
+            color: #f5e8c0;
+        }
+        
+        .container {
+            background-color: rgba(10, 10, 10, 0.85);
+            min-height: 100vh;
+            width: 100%;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .wrapped-container {
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .wrapped-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 2px solid #d3a625;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            color: #f5e8c0;
+        }
+        
+        .stat-card:hover {
+            transform: scale(1.05);
+            background-color: rgba(30, 30, 30, 0.9);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #d3a625;
+            margin: 0.5rem 0;
+        }
+        
+        .house-highlight {
+            grid-column: span 3;
+            background: linear-gradient(135deg, rgba(116, 0, 1, 0.3), rgba(14, 26, 64, 0.3));
+            padding: 2rem;
+            border: 3px solid #d3a625;
+        }
+        
+        .banner {
+            background: linear-gradient(135deg, rgba(116, 0, 1, 0.7), rgba(14, 26, 64, 0.7));
+            border-bottom: 3px solid #d3a625;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="banner">
+            <h1>Marauder's Map of Your Progress</h1>
+            <div class="house-badge" id="user-house">
+                <span>Ravenclaw</span>
+            </div>
+        </header>
+
+        <main class="wrapped-container">
+            <h2>Your 2023 Study Wrapped</h2>
+            <p>Revealing your magical academic journey this year...</p>
+            
+            <div class="wrapped-stats">
+                <div class="stat-card">
+                    <div class="stat-number">327</div>
+                    <div class="stat-label">Total Study Hours</div>
+                    <div class="stat-comparison">+42 from last year</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">29</div>
+                    <div class="stat-label">All-Nighters</div>
+                    <div class="stat-comparison">Most in November</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">Defense Against the Dark Arts</div>
+                    <div class="stat-label">Top Subject</div>
+                    <div class="stat-comparison">87 hours studied</div>
+                </div>
+                
+                <div class="stat-card house-highlight">
+                    <div class="stat-number">150</div>
+                    <div class="stat-label">House Points Earned</div>
+                    <div class="stat-comparison">Top 10% of Ravenclaw</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">14</div>
+                    <div class="stat-label">Longest Streak</div>
+                    <div class="stat-comparison">October 5-19</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-number">86%</div>
+                    <div class="stat-label">Average Focus Score</div>
+                    <div class="stat-comparison">Better than 92% of students</div>
+                </div>
+            </div>
+            
+            <button class="hogwarts-button" onclick="window.location.href='../index.html'">Return to Dashboard</button>
+        </main>
+    </div>
+</body>
+</html>

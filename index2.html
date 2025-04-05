@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Study Progress Tracker</title>
+  <link rel="stylesheet" href="styles2.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Universe selection screen -->
+    <div id="universe-select">
+        <div class="universe-option harry" onclick="selectUniverse('harry')">
+          <div class="overlay">
+            <h2>Harry Potter</h2>
+          </div>
+        </div>
+        <div class="universe-option got" onclick="selectUniverse('got')">
+          <div class="overlay">
+            <h2>Game of Thrones</h2>
+          </div>
+        </div>
+        <div class="universe-option avengers" onclick="selectUniverse('avengers')">
+          <div class="overlay">
+            <h2>Avengers</h2>
+          </div>
+        </div>
+      </div>
+      
+  
+  <!-- Splash screen -->
+<div id="splash" style="display: none;">
+    <div class="quote-box">
+        <p class="quote" id="quote-text"></p>
+        <p class="study-tip" id="study-tip"></p>
+      </div>
+      
+  </div>
+
+
+  <div class="login-container">
+  <h1>StudyTracker</h1>
+  <h2>Login</h2>
+
+  <form onsubmit="return false;"> <!-- prevents form from submitting -->
+    <input type="email" placeholder="Email Address" required>
+    <input type="password" placeholder="Password" required>
+    <div class="forgot-password">
+      <a href="#">Forgot password?</a>
+    </div>
+    <a href="index.html" class="login-button">Log In</a>
+  </form>
+
+  <div class="signup-section">
+    <p>Don't have an account?</p>
+    <a href="index.html">Sign Up</a>
+  </div>
+</div>
+
+  <script>
+    // Show splash screen for 3 seconds, then reveal main content
+    setTimeout(() => {
+      document.getElementById('splash').classList.add('fade-out');
+      setTimeout(() => {
+        document.getElementById('splash').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+      }, 1000); // fade duration
+    }, 3000);
+  </script>
+</body>
+</html>
+
+<script>
+      
+    function selectUniverse(universe) {
+        const splash = document.getElementById('splash');
+        const quoteText = document.getElementById('quote-text');
+        const studyTip = document.getElementById('study-tip');
+      
+        // Hide universe selection, show splash
+        document.getElementById('universe-select').style.display = 'none';
+        splash.style.display = 'flex';
+        splash.style.opacity = '1';
+      
+        let quotes = [];
+        let tips = [];
+        let backgroundImage = '';
+      
+        if (universe === 'harry') {
+          quotes = [
+            `"It is our choices that show what we truly are, far more than our abilities." – Dumbledore`,
+            `"Happiness can be found even in the darkest of times, if one only remembers to turn on the light." – Dumbledore`,
+            `"I solemnly swear that I am up to no good." – Marauder's Map`,
+            `"You're a wizard, Harry." – Hagrid`,
+            `"Fear of a name increases fear of the thing itself." – Hermione Granger`
+          ];
+          tips = [
+            "Write your notes by hand, like crafting your own spellbook.",
+            "Break tasks into potions-sized portions.",
+            "Create a study schedule – time-turner style!",
+            "Keep distractions in the Forbidden Forest.",
+            "Practice until it feels like second nature – like flying a broomstick."
+          ];
+          backgroundImage = "url('harrypotter.jpg')";
+        }
+      
+        else if (universe === 'got') {
+          quotes = [
+            `"A mind needs books as a sword needs a whetstone, if it is to keep its edge." – Tyrion Lannister`,
+            `"The things I do for love." – Jaime Lannister`,
+            `"Chaos isn't a pit. Chaos is a ladder." – Littlefinger`,
+            `"You know nothing, Jon Snow." – Ygritte`,
+            `"Winter is coming." – Ned Stark`
+          ];
+          tips = [
+            "Make a study plan as strategic as a battle map.",
+            "Keep your mind sharp, like Valyrian steel.",
+            "Organize notes by house (or subject).",
+            "Conquer tough topics like a true Targaryen.",
+            "Guard your focus like the Wall."
+          ];
+          backgroundImage = "url('gameofthrones.jpg')";
+        }
+      
+        else if (universe === 'avengers') {
+          quotes = [
+            `"I can do this all day." – Captain America`,
+            `"Genius, billionaire, playboy, philanthropist." – Tony Stark`,
+            `"Whatever happens tomorrow you must promise me one thing. That you will stay who you are." – Erskine to Steve`,
+            `"Part of the journey is the end." – Tony Stark`,
+            `"I'm always angry." – Bruce Banner`
+          ];
+          tips = [
+            "Break big missions (tasks) into mini-goals like assembling the team.",
+            "Build momentum—Iron Man didn't finish Mark I in one day.",
+            "Rest is also part of the strategy (even Thor naps).",
+            "Time-block your sessions like mission schedules.",
+            "Stay consistent, even if it's just 1% better daily."
+          ];
+          backgroundImage = "url('avengers.jpg')";
+        }
+      
+        // Randomly select quote & tip
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        quoteText.textContent = quotes[randomIndex];
+        studyTip.textContent = tips[randomIndex];
+      
+        // Set splash background
+        splash.style.backgroundImage = backgroundImage;
+        splash.style.backgroundSize = 'cover';
+        splash.style.backgroundPosition = 'center';
+      
+        // Delay before transitioning to main content
+        setTimeout(() => {
+          splash.classList.add('fade-out');
+          setTimeout(() => {
+            splash.style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+          }, 1000); // fade duration
+        }, 3000); // quote visible duration
+      }
+      
+</script>

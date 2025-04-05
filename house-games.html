@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Cup Challenges</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=MedievalSharp&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: url('../dining-room-5114247_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Cinzel', serif;
+            color: #f5e8c0;
+        }
+        
+        .container {
+            background-color: rgba(10, 10, 10, 0.85);
+            min-height: 100vh;
+            width: 100%;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .game-center {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .game-card {
+            background-color: rgba(20, 20, 20, 0.8);
+            border: 2px solid;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gryffindor-game {
+            border-color: #740001;
+            background: linear-gradient(rgba(116, 0, 1, 0.2), rgba(116, 0, 1, 0.1));
+        }
+        
+        .ravenclaw-game {
+            border-color: #0e1a40;
+            background: linear-gradient(rgba(14, 26, 64, 0.2), rgba(14, 26, 64, 0.1));
+        }
+        
+        .hufflepuff-game {
+            border-color: #ecb939;
+            background: linear-gradient(rgba(236, 185, 57, 0.2), rgba(236, 185, 57, 0.1));
+        }
+        
+        .slytherin-game {
+            border-color: #1a472a;
+            background: linear-gradient(rgba(26, 71, 42, 0.2), rgba(26, 71, 42, 0.1));
+        }
+        
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid;
+        }
+        
+        .difficulty {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .difficulty-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #666;
+        }
+        
+        .difficulty-dot.filled {
+            background-color: #d3a625;
+        }
+        
+        .game-content {
+            display: none;
+            padding: 1rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+        
+        .active .game-content {
+            display: block;
+        }
+        
+        .question {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        
+        .options {
+            display: grid;
+            gap: 0.5rem;
+        }
+        
+        .option {
+            padding: 0.8rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .timer {
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 1rem 0;
+            color: #d3a625;
+        }
+        
+        .hint-button {
+            background-color: rgba(211, 166, 37, 0.3);
+            border: 1px solid #d3a625;
+            color: #f5e8c0;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .hint {
+            display: none;
+            font-size: 0.9rem;
+            color: #d3a625;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        .banner {
+            background: linear-gradient(135deg, rgba(116, 0, 1, 0.7), rgba(14, 26, 64, 0.7));
+            border-bottom: 3px solid #d3a625;
+        }
+        
+        .answer-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid #d3a625;
+            color: #f5e8c0;
+            padding: 0.5rem;
+            border-radius: 3px;
+            width: 100px;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="banner">
+            <h1>House Cup Challenges</h1>
+            <div class="house-badge" id="user-house">
+                <span>Ravenclaw</span>
+            </div>
+        </header>
+
+        <main class="game-center">
+            <h2>Test Your Wizarding Wit!</h2>
+            <p>Complete challenges to earn house points and unlock new levels of magical knowledge</p>
+            
+            <!-- Gryffindor Game: Dueling Puzzles -->
+            <div class="game-card gryffindor-game" id="dueling-puzzles">
+                <div class="game-header">
+                    <h3>Dueling Puzzles</h3>
+                    <div class="difficulty">
+                        <div class="difficulty-dot filled"></div>
+                        <div class="difficulty-dot"></div>
+                        <div class="difficulty-dot"></div>
+                    </div>
+                </div>
+                <p>Face logical puzzles worthy of a wizard's duel! Think quickly under pressure.</p>
+                <button class="hogwarts-button start-game">Begin Challenge</button>
+                
+                <div class="game-content">
+                    <div class="timer">Time remaining: <span id="question1-timer">60</span>s</div>
+                    <div class="question">
+                        <p>🧙‍♂ <strong>Q1: The Hogwarts Investment Riddle 💰✨</strong><br><br>
+                            At Gringotts Wizarding Bank, a wizard named Harry Potter wanted to invest his Gallons wisely...
+                            <br><br>Harry wants to invest in such a way that he receives the same dividend from both stocks. In what ratio should he split his investment?</p>
+                        <button class="hint-button">Show Hint</button>
+                        <div class="hint">Hint: Calculate dividend per share per gallon invested for each stock.</div>
+                    </div>
+                    <div class="options">
+                        <div class="option" data-correct="false">12:9</div>
+                        <div class="option" data-correct="false">10:8</div>
+                        <div class="option" data-correct="true">16:15</div>
+                        <div class="option" data-correct="false">15:12</div>
+                    </div>
+                </div>
+        
+                <!-- Question 2 -->
+                <div class="game-content">
+                    <div class="timer">Time remaining: <span id="question2-timer">45</span>s</div>
+                    <div class="question">
+                        <p>🪄 <strong>Q2: The Hogwarts Marks Enigma 🧙‍♂✨</strong><br><br>
+                            In the enchanted halls of Hogwarts, a pupil's marks were altered—recorded as 83 instead of 63!
+                            <br><br>What is the number of wizards in binary?</p>
+                        <button class="hint-button">Show Hint</button>
+                        <div class="hint">Hint: The difference in marks (20) divided by the average increase (0.5) gives total students.</div>
+                    </div>
+                    <div class="options">
+                        <div class="option" data-correct="true">11000</div>
+                        <div class="option" data-correct="false">10111</div>
+                        <div class="option" data-correct="false">11001</div>
+                        <div class="option" data-correct="false">11100</div>
+                    </div>
+                </div>
+        
+                <!-- Question 3 -->
+                <div class="game-content">
+                    <div class="timer">Time remaining: <span id="question3-timer">90</span>s</div>
+                    <div class="question">
+                        <p><strong>Q3: Hogwarts Library Visitors 📚</strong><br><br>
+                            Madam Pince noticed:<br>
+                            - Sundays: 510 visitors average<br>
+                            - Other days: 240 visitors average<br><br>
+                            If a 30-day month begins on Sunday, what's the average visitors per day that month?</p>
+                        <button class="hint-button">Show Hint</button>
+                        <div class="hint">Hint: Calculate how many Sundays are in the month first.</div>
+                    </div>
+                    <div class="options">
+                        <div class="option" data-correct="false">300</div>
+                        <div class="option" data-correct="false">275</div>
+                        <div class="option" data-correct="true">285</div>
+                        <div class="option" data-correct="false">290</div>
+                    </div>
+                </div>
+        
+                <!-- Question 4 -->
+                <div class="game-content">
+                    <div class="timer">Time remaining: <span id="question4-timer">120</span>s</div>
+                    <div class="question">
+                        <p><strong>Q4: Logic Labyrinth Elixir 🧪</strong><br><br>
+                            Professor Snape's potion requires:<br>
+                            - 1 herb, 1 root, 1 liquid<br>
+                            - The herb must not share its family with the root<br><br>
+                            What are the initials of the correct ingredients?</p>
+                        <button class="hint-button">Show Hint</button>
+                        <div class="hint">Hint: Phoenix represents dragon's legacy (Fire connection).</div>
+                    </div>
+                    <div class="options">
+                        <div class="option" data-correct="false">WGU</div>
+                        <div class="option" data-correct="false">AGU</div>
+                        <div class="option" data-correct="true">UAM</div>
+                        <div class="option" data-correct="false">WAM</div>
+                    </div>
+                </div>
+        
+                <!-- Question 5 -->
+                <div class="game-content">
+                    <div class="timer">Time remaining: <span id="question5-timer">150</span>s</div>
+                    <div class="question">
+                        <p><strong>Q5: Snape’s Potion Stirring Spell 🧪⚗</strong><br><br>
+                            v(t) = 4t * (t - 5) * (t - 10)<br><br>
+                            Calculate total revolutions from t=0 to t=5. Then use that result to find a magical number mod 26.<br>
+                            What is the final number before letter conversion?</p>
+                        <button class="hint-button">Show Hint</button>
+                        <div class="hint">Hint: First integrate the function from 0 to 5 to find total revolutions.</div>
+                    </div>
+                    <div class="options">
+                        <div class="option" data-correct="false">10</div>
+                        <div class="option" data-correct="false">15</div>
+                        <div class="option" data-correct="true">12</div>
+                        <div class="option" data-correct="false">8</div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+    
+            
+            <button class="hogwarts-button" onclick="window.location.href='../index.html'" style="margin-top: 2rem;">Return to Dashboard</button>
+        </main>
+    </div>
+
+    <script>
+        document.querySelectorAll('.start-game').forEach(button => {
+            button.addEventListener('click', function() {
+                const gameCard = this.closest('.game-card');
+                gameCard.classList.add('active');
+                showQuestion(gameCard, 0); // Start with first question
+                this.style.display = 'none'; // Hide the start button
+            });
+        });
+    
+        document.querySelectorAll('.hint-button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.nextElementSibling.style.display = 'block';
+            });
+        });
+    
+        let currentQuestion = 0;
+        let timer;
+    
+        function showQuestion(container, questionIndex) {
+            // Hide all questions first
+            const allQuestions = container.querySelectorAll('.game-content');
+            allQuestions.forEach(q => q.style.display = 'none');
+            
+            // Show the current question
+            const currentQ = allQuestions[questionIndex];
+            currentQ.style.display = 'block';
+            
+            // Reset timer
+            const timerSpan = currentQ.querySelector('span');
+            let timeLeft = parseInt(timerSpan.textContent);
+            
+            // Clear any existing timer
+            if (timer) clearInterval(timer);
+            
+            // Start new timer
+            timer = setInterval(() => {
+                timeLeft--;
+                timerSpan.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    timerSpan.parentElement.style.color = "#ff5555";
+                    timerSpan.parentElement.textContent = "⏰ Time's up!";
+                    moveToNextQuestion(container, questionIndex, allQuestions.length);
+                }
+            }, 1000);
+            
+            // Set up answer options
+            currentQ.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    clearInterval(timer); // Stop timer when answered
+                    
+                    if (this.dataset.correct === "true") {
+                        this.style.backgroundColor = "rgba(144, 238, 144, 0.4)"; // light green
+                    } else {
+                        this.style.backgroundColor = "rgba(255, 99, 71, 0.4)"; // tomato red
+                    }
+                    
+                    // Move to next question after a brief delay
+                    setTimeout(() => {
+                        moveToNextQuestion(container, questionIndex, allQuestions.length);
+                    }, 1000);
+                });
+            });
+        }
+    
+        function moveToNextQuestion(container, currentIndex, totalQuestions) {
+            if (currentIndex < totalQuestions - 1) {
+                showQuestion(container, currentIndex + 1);
+            } else {
+                // All questions completed
+                container.querySelectorAll('.game-content').forEach(q => q.style.display = 'none');
+                const endMessage = document.createElement('div');
+                endMessage.className = 'game-content';
+                endMessage.innerHTML = '<h3>Challenge Complete!</h3><p>You have finished all questions for this challenge.</p>';
+                container.appendChild(endMessage);
+            }
+        }
+    </script>
+    
+    
+</body>
+</html>
